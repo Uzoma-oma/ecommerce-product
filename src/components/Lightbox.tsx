@@ -1,74 +1,77 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useMediaQuery } from "../hooks/useMediaQuery";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 type LightboxProps = {
   images: string[];
+  thumbnails: string[];
   initialIndex: number;
   onClose: () => void;
 };
 
-export default function Lightbox({ images, initialIndex, onClose }: LightboxProps) {
-  const [current, setCurrent] = useState(initialIndex);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+export default function Lightbox({
+  images,
+  thumbnails,
+  initialIndex,
+  onClose,
+}: LightboxProps) {
+  const [selected, setSelected] = useState(initialIndex);
 
-  if (!isDesktop) return null; // ✅ Skip rendering on mobile
-
-  const prev = () => setCurrent((current - 1 + images.length) % images.length);
-  const next = () => setCurrent((current + 1) % images.length);
+  const prev = () =>
+    setSelected((selected - 1 + images.length) % images.length);
+  const next = () => setSelected((selected + 1) % images.length);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75">
-      <div className="relative max-w-lg w-full px-4">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-10 right-0 text-white hover:text-orange-400"
-        >
-          <X size={28} />
-        </button>
+    <div className="fixed inset-0 bg-black/80 flex flex-col items-center justify-center z-50">
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute top-6 right-6 text-white hover:text-orange-400"
+      >
+        <X size={28} />
+      </button>
 
-        {/* Main Image */}
+      {/* Main Image */}
+      <div className="relative w-[500px] h-[500px]">
         <img
-          src={images[current]}
-          alt="Product zoomed"
-          className="rounded-2xl w-full"
+          src={images[selected]}
+          alt="Selected product"
+          className="w-full h-full object-cover rounded-2xl"
         />
 
-        {/* Navigation */}
+        {/* Arrows */}
         <button
           onClick={prev}
-          className="absolute top-1/2 -left-6 -translate-y-1/2 bg-white rounded-full p-3 shadow-md"
+          className="absolute top-1/2 left-[-20px] -translate-y-1/2 bg-white rounded-full p-3 shadow-md"
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft size={24} />
         </button>
         <button
           onClick={next}
-          className="absolute top-1/2 -right-6 -translate-y-1/2 bg-white rounded-full p-3 shadow-md"
+          className="absolute top-1/2 right-[-20px] -translate-y-1/2 bg-white rounded-full p-3 shadow-md"
         >
-          <ChevronRight size={20} />
+          <ChevronRight size={24} />
         </button>
+      </div>
 
-        {/* Thumbnails */}
-        <div className="flex gap-4 justify-center mt-6">
-          {images.map((src, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              className={`rounded-xl overflow-hidden border-2 ${
-                i === current ? "border-orange-500" : "border-transparent"
+      {/* Thumbnails (desktop only) */}
+      <div className="hidden md:flex gap-6 mt-6">
+        {thumbnails.map((thumb, i) => (
+          <button
+            key={i}
+            onClick={() => setSelected(i)}
+            className={`rounded-xl overflow-hidden border-2 transition ${
+              i === selected ? "border-orange-500" : "border-transparent"
+            }`}
+          >
+            <img
+              src={thumb}
+              alt={`Thumbnail ${i + 1}`}
+              className={`w-20 h-20 object-cover ${
+                i === selected ? "opacity-100" : "hover:opacity-70"
               }`}
-            >
-              <img
-                src={src.replace(".jpg", "-thumbnail.jpg")}
-                alt={`Thumbnail ${i + 1}`}
-                className={`w-20 h-20 object-cover ${
-                  i === current ? "opacity-75" : "hover:opacity-75"
-                }`}
-              />
-            </button>
-          ))}
-        </div>
+            />
+          </button>
+        ))}
       </div>
     </div>
   );

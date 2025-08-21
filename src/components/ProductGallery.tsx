@@ -97,11 +97,12 @@ export default function ProductGallery() {
 
       {/* Lightbox Modal */}
       {lightboxOpen && (
-        <Lightbox
-          images={IMAGES}
-          initialIndex={selected}
-          onClose={() => setLightboxOpen(false)}
-        />
+  <Lightbox
+    images={IMAGES}
+    thumbnails={THUMBNAILS}   
+    initialIndex={selected}
+    onClose={() => setLightboxOpen(false)}
+  />
       )}
     </div>
   );
