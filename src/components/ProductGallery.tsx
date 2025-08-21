@@ -31,9 +31,8 @@ function Thumbnail({ src, alt, isActive, onClick }: ThumbnailProps) {
       <img
         src={src}
         alt={alt}
-        className={`w-20 h-20 object-cover ${
-          isActive ? "opacity-70" : "hover:opacity-70"
-        }`}
+        className={`w-20 h-20 object-cover 
+          ${isActive ? "opacity-100" : "hover:opacity-70"}`}
       />
     </button>
   );
@@ -43,7 +42,7 @@ export default function ProductGallery() {
   const [selected, setSelected] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  // ✅ Keep arrays with imports
+  // ✅ Arrays with imports
   const IMAGES = [img1, img2, img3, img4];
   const THUMBNAILS = [thumb1, thumb2, thumb3, thumb4];
 
@@ -83,8 +82,8 @@ export default function ProductGallery() {
         />
       </div>
 
-      {/* Thumbnails */}
-      <div className="hidden md:flex gap-6 justify-center">
+      {/* Thumbnails (desktop only) */}
+      <div className="hidden md:flex gap-6 justify-center md:justify-start md:w-[405px] md:mx-auto">
         {THUMBNAILS.map((src, i) => (
           <Thumbnail
             key={i}
