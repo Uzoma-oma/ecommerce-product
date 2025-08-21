@@ -99,7 +99,7 @@ export default function ProductGallery() {
       {lightboxOpen && (
   <Lightbox
     images={IMAGES}
-    thumbnails={THUMBNAILS}   
+    thumbnails={THUMBNAILS}   // ✅ pass thumbnails here
     initialIndex={selected}
     onClose={() => setLightboxOpen(false)}
   />

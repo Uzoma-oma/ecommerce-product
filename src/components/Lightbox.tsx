@@ -3,75 +3,72 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 type LightboxProps = {
   images: string[];
-  thumbnails: string[];
-  initialIndex: number;
+  thumbnails: string[];   // ✅ add thumbnails prop
+  initialIndex?: number;
   onClose: () => void;
 };
 
 export default function Lightbox({
   images,
   thumbnails,
-  initialIndex,
+  initialIndex = 0,
   onClose,
 }: LightboxProps) {
-  const [selected, setSelected] = useState(initialIndex);
+  const [current, setCurrent] = useState(initialIndex);
 
   const prev = () =>
-    setSelected((selected - 1 + images.length) % images.length);
-  const next = () => setSelected((selected + 1) % images.length);
+    setCurrent((current - 1 + images.length) % images.length);
+  const next = () => setCurrent((current + 1) % images.length);
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex flex-col items-center justify-center z-50">
-      {/* Close button */}
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 text-white hover:text-orange-400"
+        className="absolute top-6 right-6 text-white text-3xl"
       >
         <X size={28} />
       </button>
 
-      {/* Main Image */}
-      <div className="relative w-[500px] h-[500px]">
+      <div className="relative max-w-xl w-full flex flex-col items-center gap-6">
+        {/* Main Image */}
         <img
-          src={images[selected]}
-          alt="Selected product"
-          className="w-full h-full object-cover rounded-2xl"
+          src={images[current]}
+          alt={`Product ${current + 1}`}
+          className="rounded-2xl w-full object-cover"
         />
 
         {/* Arrows */}
         <button
           onClick={prev}
-          className="absolute top-1/2 left-[-20px] -translate-y-1/2 bg-white rounded-full p-3 shadow-md"
+          className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-3"
         >
           <ChevronLeft size={24} />
         </button>
         <button
           onClick={next}
-          className="absolute top-1/2 right-[-20px] -translate-y-1/2 bg-white rounded-full p-3 shadow-md"
+          className="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-3"
         >
           <ChevronRight size={24} />
         </button>
-      </div>
 
-      {/* Thumbnails (desktop only) */}
-      <div className="hidden md:flex gap-6 mt-6">
-        {thumbnails.map((thumb, i) => (
-          <button
-            key={i}
-            onClick={() => setSelected(i)}
-            className={`rounded-xl overflow-hidden border-2 transition ${
-              i === selected ? "border-orange-500" : "border-transparent"
-            }`}
-          >
-            <img
-              src={thumb}
-              alt={`Thumbnail ${i + 1}`}
-              className={`w-20 h-20 object-cover ${
-                i === selected ? "opacity-100" : "hover:opacity-70"
+        {/* ✅ Thumbnails row */}
+        <div className="flex gap-4 mt-4">
+          {thumbnails.map((thumb, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`rounded-xl overflow-hidden border-2 ${
+                i === current ? "border-orange-500" : "border-transparent"
               }`}
-            />
-          </button>
-        ))}
+            >
+              <img
+                src={thumb}
+                alt={`Thumbnail ${i + 1}`}
+                className="w-20 h-20 object-cover hover:opacity-70"
+              />
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
