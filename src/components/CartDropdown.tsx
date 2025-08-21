@@ -1,5 +1,6 @@
-import { useCart } from "../hooks/useCart";
-import deleteIcon from "../assets/icon-delete.svg"; // ✅ FIX
+import { useCart } from "../hooks/useCart"; 
+import deleteIcon from "../assets/icon-delete.svg"; // ✅ stays in /src/assets
+import productThumb from "../assets/image-product-1-thumbnail.jpg"; // ✅ example thumbnail
 
 export default function CartDropdown() {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -21,7 +22,7 @@ export default function CartDropdown() {
               {cartItems.map((item) => (
                 <div key={item.id} className="flex items-center gap-4">
                   <img
-                    src={item.thumbnail}
+                    src={productThumb} // ✅ imported from /src/assets
                     alt={item.name}
                     className="w-12 h-12 rounded-md"
                   />
