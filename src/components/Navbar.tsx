@@ -2,6 +2,11 @@ import { useState } from "react";
 import { useCart } from "../hooks/useCart";
 import CartDropdown from "../components/CartDropdown";
 
+import iconMenu from "/src/assets/icon-menu.svg";
+import logo from "/src/assets/logo.svg";
+import iconCart from "/src/assets/icon-cart.svg";
+import avatar from "/src/assets/image-avatar.png";
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -20,31 +25,30 @@ export default function Navbar() {
             onClick={() => setIsMenuOpen((prev) => !prev)}
             className="md:hidden"
           >
-            <img src="/src/assets/icon-menu.svg" alt="menu" />
+            <img src={iconMenu} alt="menu" />
           </button>
 
           {/* Logo */}
-          <img src="/src/assets/logo.svg" alt="logo" className="h-5 md:h-6" />
+          <img src={logo} alt="logo" className="h-5 md:h-6" />
 
           {/* Desktop nav links */}
           <ul className="hidden md:flex gap-6 text-gray-500">
-  <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
-    Collections
-  </li>
-  <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
-    Men
-  </li>
-  <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
-    Women
-  </li>
-  <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
-    About
-  </li>
-  <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
-    Contact
-  </li>
-</ul>
-
+            <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
+              Collections
+            </li>
+            <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
+              Men
+            </li>
+            <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
+              Women
+            </li>
+            <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
+              About
+            </li>
+            <li className="relative cursor-pointer hover:text-veryDarkBlue after:content-[''] after:absolute after:bottom-[-25px] after:left-0 after:w-full after:h-[3px] after:bg-orange-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-center">
+              Contact
+            </li>
+          </ul>
         </div>
 
         {/* Right Section */}
@@ -55,7 +59,7 @@ export default function Navbar() {
             className="relative group"
           >
             <img
-              src="/src/assets/icon-cart.svg"
+              src={iconCart}
               alt="Cart"
               className="w-6 h-6 group-hover:opacity-70"
             />
@@ -69,7 +73,7 @@ export default function Navbar() {
           {/* Avatar */}
           <button className="border-2 border-transparent hover:border-orange rounded-full">
             <img
-              src="/src/assets/image-avatar.png"
+              src={avatar}
               alt="User avatar"
               className="w-8 h-8 md:w-10 md:h-10 rounded-full"
             />
@@ -80,7 +84,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Overlay (optional, not expanded here) */}
+      {/* Mobile Overlay */}
       {isMenuOpen && (
         <div className="absolute top-0 left-0 w-full h-screen bg-black/50 md:hidden z-40">
           {/* You can add mobile menu content here later */}
