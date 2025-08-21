@@ -86,10 +86,28 @@ export default function Navbar() {
 
       {/* Mobile Overlay */}
       {isMenuOpen && (
-        <div className="absolute top-0 left-0 w-full h-screen bg-black/50 md:hidden z-40">
-          {/* You can add mobile menu content here later */}
-        </div>
-      )}
+  <div className="absolute top-0 left-0 w-full h-screen bg-black/50 md:hidden z-40">
+    {/* Mobile Sidebar */}
+    <div className="bg-white w-64 h-full p-6">
+      {/* Close Button */}
+      <button
+        onClick={() => setIsMenuOpen(false)}
+        className="mb-8"
+      >
+        ✕
+      </button>
+
+      {/* Mobile Nav Links */}
+      <ul className="flex flex-col gap-6 text-gray-800 font-bold">
+        <li className="cursor-pointer">Collections</li>
+        <li className="cursor-pointer">Men</li>
+        <li className="cursor-pointer">Women</li>
+        <li className="cursor-pointer">About</li>
+        <li className="cursor-pointer">Contact</li>
+      </ul>
+    </div>
+  </div>
+)}
     </header>
   );
 }
