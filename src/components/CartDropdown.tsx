@@ -1,4 +1,5 @@
 import { useCart } from "../hooks/useCart";
+import deleteIcon from "../assets/icon-delete.svg"; // ✅ FIX
 
 export default function CartDropdown() {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -18,10 +19,7 @@ export default function CartDropdown() {
           <>
             <div className="space-y-6">
               {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center gap-4"
-                >
+                <div key={item.id} className="flex items-center gap-4">
                   <img
                     src={item.thumbnail}
                     alt={item.name}
@@ -40,7 +38,7 @@ export default function CartDropdown() {
                     onClick={() => removeFromCart(item.id)}
                     aria-label="Remove item"
                   >
-                    <img src="/src/assets/icon-delete.svg" alt="delete" />
+                    <img src={deleteIcon} alt="delete" /> {/* ✅ FIX */}
                   </button>
                 </div>
               ))}
