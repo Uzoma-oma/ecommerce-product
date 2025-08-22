@@ -51,27 +51,27 @@ export default function ProductGallery() {
   const next = () => setSelected((selected + 1) % IMAGES.length);
 
   return (
-    <div className="flex flex-col gap-6 mt-10 md:mt-16">
+    <div className="flex flex-col gap-6 mt-0 md:mt-16">
       {/* Main Image */}
-      <div className="relative w-full">
+      <div className="relative w-screen max-w-full -mx-4 md:mx-0">
         <img
           src={IMAGES[selected]}
           alt="Selected product"
-          className="rounded-none md:rounded-2xl w-full md:w-[405px] md:h-[405px] object-cover md:mx-auto"
+          className="w-full h-auto object-cover md:w-[405px] md:h-[405px] md:mx-auto rounded-none md:rounded-2xl"
         />
 
         {/* Mobile arrows */}
         <button
           onClick={prev}
-          className="absolute top-1/2 left-4 -translate-y-1/2 bg-white rounded-full p-2 shadow-md md:hidden"
+          className="absolute top-1/2 left-3 -translate-y-1/2 bg-white rounded-full p-3 shadow-md md:hidden hover:scale-105 transition"
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft size={24} />
         </button>
         <button
           onClick={next}
-          className="absolute top-1/2 right-4 -translate-y-1/2 bg-white rounded-full p-2 shadow-md md:hidden"
+          className="absolute top-1/2 right-3 -translate-y-1/2 bg-white rounded-full p-3 shadow-md md:hidden hover:scale-105 transition"
         >
-          <ChevronRight size={20} />
+          <ChevronRight size={24} />
         </button>
 
         {/* Lightbox trigger (desktop only) */}
@@ -97,12 +97,12 @@ export default function ProductGallery() {
 
       {/* Lightbox Modal */}
       {lightboxOpen && (
-  <Lightbox
-    images={IMAGES}
-    thumbnails={THUMBNAILS}   // ✅ pass thumbnails here
-    initialIndex={selected}
-    onClose={() => setLightboxOpen(false)}
-  />
+        <Lightbox
+          images={IMAGES}
+          thumbnails={THUMBNAILS} // ✅ pass thumbnails here
+          initialIndex={selected}
+          onClose={() => setLightboxOpen(false)}
+        />
       )}
     </div>
   );
