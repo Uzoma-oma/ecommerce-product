@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "../hooks/useCart"; // ✅ import cart context
+import { useCart } from "../hooks/useCart"; 
 
 export default function ProductInfo() {
   const [quantity, setQuantity] = useState(1);
-  const { addToCart } = useCart(); // ✅ get addToCart from context
+  const { addToCart } = useCart(); 
 
   const increase = () => setQuantity((q) => q + 1);
   const decrease = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
@@ -15,9 +15,9 @@ export default function ProductInfo() {
       name: "Fall Limited Edition Sneakers",
       price: 125,
       qty: quantity,
-      thumbnail: "/src/assets/image-product-1-thumbnail.jpg", // ✅ fixed thumbnail key
+      thumbnail: "/src/assets/image-product-1-thumbnail.jpg", 
     });
-    setQuantity(1); // reset qty after adding
+    setQuantity(1); 
   };
 
   return (

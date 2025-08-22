@@ -1,6 +1,6 @@
 import { useCart } from "../hooks/useCart"; 
-import deleteIcon from "../assets/icon-delete.svg"; // ✅ stays in /src/assets
-import productThumb from "../assets/image-product-1-thumbnail.jpg"; // ✅ example thumbnail
+import deleteIcon from "../assets/icon-delete.svg"; 
+import productThumb from "../assets/image-product-1-thumbnail.jpg"; 
 
 export default function CartDropdown() {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -22,7 +22,7 @@ export default function CartDropdown() {
               {cartItems.map((item) => (
                 <div key={item.id} className="flex items-center gap-4">
                   <img
-                    src={productThumb} // ✅ imported from /src/assets
+                    src={productThumb} // 
                     alt={item.name}
                     className="w-12 h-12 rounded-md"
                   />
@@ -39,7 +39,7 @@ export default function CartDropdown() {
                     onClick={() => removeFromCart(item.id)}
                     aria-label="Remove item"
                   >
-                    <img src={deleteIcon} alt="delete" /> {/* ✅ FIX */}
+                    <img src={deleteIcon} alt="delete" /> 
                   </button>
                 </div>
               ))}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Lightbox from "../components/Lightbox";
 
-// ✅ Import images from /src/assets
+//  Import images from /src/assets
 import img1 from "../assets/image-product-1.jpg";
 import img2 from "../assets/image-product-2.jpg";
 import img3 from "../assets/image-product-3.jpg";
@@ -42,7 +42,7 @@ export default function ProductGallery() {
   const [selected, setSelected] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  // ✅ Arrays with imports
+  //  Arrays with imports
   const IMAGES = [img1, img2, img3, img4];
   const THUMBNAILS = [thumb1, thumb2, thumb3, thumb4];
 
@@ -99,7 +99,7 @@ export default function ProductGallery() {
       {lightboxOpen && (
   <Lightbox
     images={IMAGES}
-    thumbnails={THUMBNAILS}   // ✅ pass thumbnails here
+    thumbnails={THUMBNAILS}   
     initialIndex={selected}
     onClose={() => setLightboxOpen(false)}
   />
